@@ -1,0 +1,81 @@
+# ==========================================================
+# Audio datasets — far too large for git (hundreds of GB)
+# ==========================================================
+DRONE_MASTER/
+NOISE_MASTER/
+SYNTHETIC_NOISE/
+MIXED_DATASET/
+Dataset/
+Audio files/
+
+# Raw source corpora
+UAVirBASE/
+UaVirBASE*/
+NASA*/
+FSD50K*/
+UrbanSound8K*/
+ESC-50*/
+DEMAND/
+Wind farm noise benchmark/
+
+# Any loose audio anywhere
+*.wav
+*.flac
+*.mp3
+*.ogg
+*.tdms
+
+# ==========================================================
+# Model artifacts
+# ==========================================================
+*.pt
+*.pth
+*.onnx
+*.ckpt
+checkpoints/
+runs/
+wandb/
+lightning_logs/
+
+# ==========================================================
+# Python
+# ==========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+
+# ==========================================================
+# Jupyter
+# ==========================================================
+.ipynb_checkpoints/
+
+# ==========================================================
+# OS / editor
+# ==========================================================
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# ==========================================================
+# Logs & scratch
+# ==========================================================
+*.log
+scratch/
+tmp/
+temp/

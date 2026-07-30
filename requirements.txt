@@ -1,0 +1,16 @@
+# Core dependencies for the dataset & simulation pipeline
+# (feature-extraction / training deps will be added at the next stage)
+
+numpy>=1.24
+pandas>=2.0
+scipy>=1.10
+soundfile>=0.12
+tqdm>=4.65
+
+# Notes:
+#  - soundfile requires the system libsndfile library:
+#       Ubuntu/Debian : sudo apt-get install libsndfile1
+#       macOS (brew)  : brew install libsndfile
+#       Windows       : bundled with the pip wheel
+#  - simulator.py / attenuation.py import the local modules
+#    geometric.py and atmospheric.py (kept in simulation/), not PyPI packages.

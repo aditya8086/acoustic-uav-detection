@@ -1,0 +1,22 @@
+{
+    "recordings": 132,
+    "sample_rates": {
+        "96000": 132
+    },
+    "channels": {
+        "8": 132
+    },
+    "bit_depths": {
+        "32": 132
+    },
+    "distances": {
+        "None": 4,
+        "20": 64,
+        "10": 64
+    },
+    "heights": {
+        "None": 4,
+        "20": 64,
+        "10": 64
+    }
+}
