@@ -1,6 +1,6 @@
 # Acoustic UAV Detection
 
-**A physics-grounded pipeline for building a large, range-diverse training corpus for acoustic drone detection — turning a limited set of real drone recordings into a labelled dataset spanning many distances and ambient conditions.**
+**A physics-grounded pipeline for building a large, range-diverse training corpus for acoustic drone detection — turning a limited set of real drone recordings into a labeled dataset spanning many distances and ambient conditions.**
 
 `Audio ML` · `Drone / UAV Detection` · `Signal Processing` · `Dataset Engineering` · `Edge Deployment`
 
@@ -8,7 +8,7 @@ Signal processing and AI algorithms for **acoustics-based detection of drones / 
 
 The goal is a system that detects the presence of a UAV from its acoustic signature alone — distinguishing drone from no-drone under a wide range of real-world ambient conditions — robustly enough to run in real time on an embedded processor.
 
-> **Status:** The dataset-construction pipeline (this repository's focus) is complete and reproducible. Detection modelling is ongoing research and is not published here.
+> **Status:** The dataset-construction pipeline (this repository's focus) is complete and reproducible. Detection modeling is ongoing research and is not published here.
 
 ---
 
@@ -28,7 +28,7 @@ Rather than relying on the limited real recordings available, the pipeline build
 
 2. **Noise curation & synthesis.** A large environmental-noise corpus is assembled from five open datasets, aggressively cleaned, and composed into stationary background "soundscapes" representative of real deployment conditions.
 
-3. **Mixing & labelling.** Drones are mixed into those backgrounds at a sweep of controlled signal-to-noise ratios, producing a labelled dataset that lets a detector be trained and — crucially — evaluated *as a function of how faint the drone is*.
+3. **Mixing & labeling.** Drones are mixed into those backgrounds at a sweep of controlled signal-to-noise ratios, producing a labeled dataset that lets a detector be trained and — crucially — evaluated *as a function of how faint the drone is*.
 
 The dataset is designed for rigorous evaluation: not just window-level accuracy, but temporal and event-level performance (detection rate, onset latency, false-alarm rate) that reflects how a real detector would be judged.
 
@@ -36,39 +36,38 @@ The dataset is designed for rigorous evaluation: not just window-level accuracy,
 
 ## Repository layout
 
-```
 .
-├── attenuation_simulator_uavirbase/   # Distance-simulation model (Sinha et al. 2021)
-│   ├── geometric.py                   # Spherical spreading loss
-│   ├── atmospheric.py                 # Atmospheric absorption (Eq. 7-11)
-│   ├── attenuation.py                 # Combined transfer function -> audio
-│   ├── simulator.py                   # Single-recording propagation simulator
-│   ├── generate_dataset.py            # Batch-generate distance variants
-│   └── uavirbase_inspector.py         # Inspect raw recordings
+├── attenuation_simulator_uavirbase/ # Distance-simulation model (Sinha et al. 2021)
+│ ├── geometric.py # Spherical spreading loss
+│ ├── atmospheric.py # Atmospheric absorption (Eq. 7-11)
+│ ├── attenuation.py # Combined transfer function -> audio
+│ ├── simulator.py # Single-recording propagation simulator
+│ ├── generate_dataset.py # Batch-generate distance variants
+│ └── uavirbase_inspector.py # Inspect raw recordings
 │
-├── dataset_curator/                   # Noise corpus cleaning & sourcing
-│   ├── fsd50k_curator.py              # FSD50K       -> NOISE_MASTER
-│   ├── esc50_curator.py              # ESC-50       -> NOISE_MASTER
-│   ├── urbansound8k_curator.py       # UrbanSound8K -> NOISE_MASTER
-│   ├── demand_curator.py             # DEMAND field recordings -> NOISE_MASTER
-│   ├── windfarm_curator.py           # Wind Farm Noise Benchmark -> NOISE_MASTER
-│   ├── clean_wind_folder.py          # Remove woodwind-instrument contamination
-│   ├── clean_traffic_crowd.py        # Remove explosions / gunshots / laughter
-│   ├── add_ambient_to_noise.py       # Fold ambient recordings into the corpus
-│   ├── Noise_master_merger.py        # Merge curated sources into NOISE_MASTER
-│   └── rebuild_statistics.py         # Regenerate noise_master_metadata.csv
+├── dataset_curator/ # Noise corpus cleaning & sourcing
+│ ├── fsd50k_curator.py # FSD50K -> NOISE_MASTER
+│ ├── esc50_curator.py # ESC-50 -> NOISE_MASTER
+│ ├── urbansound8k_curator.py # UrbanSound8K -> NOISE_MASTER
+│ ├── demand_curator.py # DEMAND field recordings -> NOISE_MASTER
+│ ├── windfarm_curator.py # Wind Farm Noise Benchmark -> NOISE_MASTER
+│ ├── clean_wind_folder.py # Remove woodwind-instrument contamination
+│ ├── clean_traffic_crowd.py # Remove explosions / gunshots / laughter
+│ ├── add_ambient_to_noise.py # Fold ambient recordings into the corpus
+│ ├── Noise_master_merger.py # Merge curated sources into NOISE_MASTER
+│ └── rebuild_statistics.py # Regenerate noise_master_metadata.csv
 │
-├── build_synthetic_noise/             # Dataset construction
-│   ├── build_drone_master.py          # Assemble DRONE_MASTER + manifest
-│   ├── build_synthetic_noise.py       # Compose stationary noise soundscapes
-│   └── mix_and_label.py               # Mix drone + noise across an SNR sweep
+├── build_synthetic_noise/ # Dataset construction
+│ ├── build_drone_master.py # Assemble DRONE_MASTER + manifest
+│ ├── build_synthetic_noise.py # Compose stationary noise soundscapes
+│ └── mix_and_label.py # Mix drone + noise across an SNR sweep
 │
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-```
 
-The audio corpora themselves (drone recordings, noise corpus, synthesised soundscapes, mixed dataset) are large and are not tracked in git.
+
+The audio corpora themselves (drone recordings, noise corpus, synthesized soundscapes, mixed dataset) are large and are not tracked in git.
 
 ---
 
@@ -84,7 +83,7 @@ Cleans a raw multi-dataset noise corpus (FSD50K, UrbanSound8K, ESC-50, DEMAND, W
 
 ### Dataset construction — `build_synthetic_noise/`
 
-Assembles the drone corpus, composes stationary background soundscapes matched to each drone recording, and mixes the two across a range of signal-to-noise ratios to produce the final labelled dataset. Care is taken throughout to keep the train / validation / test split leakage-free (splitting at the recording-session level, before any mixing) and to keep the physical calibration of the propagation model intact (the drone is held at its recorded level; the background is scaled to set the SNR).
+Assembles the drone corpus, composes stationary background soundscapes matched to each drone recording, and mixes the two across a range of signal-to-noise ratios to produce the final labeled dataset. Care is taken throughout to keep the train / validation / test split leakage-free (splitting at the recording-session level, before any mixing) and to keep the physical calibration of the propagation model intact (the drone is held at its recorded level; the background is scaled to set the SNR).
 
 ---
 
