@@ -36,36 +36,37 @@ The dataset is designed for rigorous evaluation: not just window-level accuracy,
 
 ## Repository layout
 
+```
 .
-├── attenuation_simulator_uavirbase/ # Distance-simulation model (Sinha et al. 2021)
-│ ├── geometric.py # Spherical spreading loss
-│ ├── atmospheric.py # Atmospheric absorption (Eq. 7-11)
-│ ├── attenuation.py # Combined transfer function -> audio
-│ ├── simulator.py # Single-recording propagation simulator
-│ ├── generate_dataset.py # Batch-generate distance variants
-│ └── uavirbase_inspector.py # Inspect raw recordings
+├── attenuation_simulator_uavirbase/   # Distance-simulation model (Sinha et al. 2021)
+│   ├── geometric.py                   # Spherical spreading loss
+│   ├── atmospheric.py                 # Atmospheric absorption (Eq. 7-11)
+│   ├── attenuation.py                 # Combined transfer function -> audio
+│   ├── simulator.py                   # Single-recording propagation simulator
+│   ├── generate_dataset.py            # Batch-generate distance variants
+│   └── uavirbase_inspector.py         # Inspect raw recordings
 │
-├── dataset_curator/ # Noise corpus cleaning & sourcing
-│ ├── fsd50k_curator.py # FSD50K -> NOISE_MASTER
-│ ├── esc50_curator.py # ESC-50 -> NOISE_MASTER
-│ ├── urbansound8k_curator.py # UrbanSound8K -> NOISE_MASTER
-│ ├── demand_curator.py # DEMAND field recordings -> NOISE_MASTER
-│ ├── windfarm_curator.py # Wind Farm Noise Benchmark -> NOISE_MASTER
-│ ├── clean_wind_folder.py # Remove woodwind-instrument contamination
-│ ├── clean_traffic_crowd.py # Remove explosions / gunshots / laughter
-│ ├── add_ambient_to_noise.py # Fold ambient recordings into the corpus
-│ ├── Noise_master_merger.py # Merge curated sources into NOISE_MASTER
-│ └── rebuild_statistics.py # Regenerate noise_master_metadata.csv
+├── dataset_curator/                   # Noise corpus cleaning & sourcing
+│   ├── fsd50k_curator.py              # FSD50K       -> NOISE_MASTER
+│   ├── esc50_curator.py               # ESC-50       -> NOISE_MASTER
+│   ├── urbansound8k_curator.py        # UrbanSound8K -> NOISE_MASTER
+│   ├── demand_curator.py              # DEMAND field recordings -> NOISE_MASTER
+│   ├── windfarm_curator.py            # Wind Farm Noise Benchmark -> NOISE_MASTER
+│   ├── clean_wind_folder.py           # Remove woodwind-instrument contamination
+│   ├── clean_traffic_crowd.py         # Remove explosions / gunshots / laughter
+│   ├── add_ambient_to_noise.py        # Fold ambient recordings into the corpus
+│   ├── Noise_master_merger.py         # Merge curated sources into NOISE_MASTER
+│   └── rebuild_statistics.py          # Regenerate noise_master_metadata.csv
 │
-├── build_synthetic_noise/ # Dataset construction
-│ ├── build_drone_master.py # Assemble DRONE_MASTER + manifest
-│ ├── build_synthetic_noise.py # Compose stationary noise soundscapes
-│ └── mix_and_label.py # Mix drone + noise across an SNR sweep
+├── build_synthetic_noise/             # Dataset construction
+│   ├── build_drone_master.py          # Assemble DRONE_MASTER + manifest
+│   ├── build_synthetic_noise.py       # Compose stationary noise soundscapes
+│   └── mix_and_label.py               # Mix drone + noise across an SNR sweep
 │
 ├── requirements.txt
 ├── .gitignore
 └── README.md
-
+```
 
 The audio corpora themselves (drone recordings, noise corpus, synthesized soundscapes, mixed dataset) are large and are not tracked in git.
 
